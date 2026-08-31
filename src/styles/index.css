@@ -38,7 +38,7 @@
 	}
 
 	body {
-		@apply font-rubik antialiased bg-grey-50 dark:bg-blue-900;
+		@apply font-rubik antialiased bg-grey-50 dark:bg-blue-900 bg-[url('../assets/images/pattern-background-mobile-light.svg')] dark:bg-[url('../assets/images/pattern-background-mobile-dark.svg')] bg-no-repeat bg-top bg-cover;
 	}
 }
 
@@ -140,6 +140,10 @@
 	line-height: 150%;
 	letter-spacing: 0;
 	font-style: italic;
+}
+
+@utility boxShadowBlue {
+	box-shadow: 0px 16px 40px 0px #8fa0c124;
 }
 
 @utility sr-only {
