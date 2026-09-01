@@ -38,7 +38,19 @@
 	}
 
 	body {
-		@apply font-rubik antialiased bg-grey-50 dark:bg-blue-900 bg-[url('../assets/images/pattern-background-mobile-light.svg')] dark:bg-[url('../assets/images/pattern-background-mobile-dark.svg')] bg-no-repeat bg-top bg-cover;
+		@apply font-rubik antialiased
+		bg-grey-50 dark:bg-blue-900
+
+		bg-[url('../assets/images/pattern-background-mobile-light.svg')]
+		dark:bg-[url('../assets/images/pattern-background-mobile-dark.svg')]
+
+		md:bg-[url('../assets/images/pattern-background-tablet-light.svg')]
+		md:dark:bg-[url('../assets/images/pattern-background-tablet-dark.svg')]
+
+		xl:bg-[url('../assets/images/pattern-background-desktop-light.svg')]
+		xl:dark:bg-[url('../assets/images/pattern-background-desktop-dark.svg')]
+
+		bg-no-repeat bg-top bg-cover;
 	}
 }
 
@@ -142,8 +154,12 @@
 	font-style: italic;
 }
 
-@utility boxShadowBlue {
+@utility boxShadowLight {
 	box-shadow: 0px 16px 40px 0px #8fa0c124;
+}
+
+@utility boxShadowDark {
+	box-shadow: 0px 16px 40px 0px hsla(216, 25%, 25%, 0.14);
 }
 
 @utility sr-only {
