@@ -25,7 +25,7 @@ export const Welcome = () => {
 									to={quiz.url}
 									className='flex items-center gap-4 p-4 bg-white rounded-xl boxShadowLight dark:boxShadowDark dark:bg-blue-850 md:gap-8 xl:transition-transform xl:hover:duration-300 xl:hover:scale-105'
 								>
-									<span className={`${quiz.bgColor} h-10 w-10 p-[0.357rem] rounded-md`}>
+									<span className={`${quiz.bgColor} h-10 w-10 p-[0.357rem] rounded-md md:p-2 md:h-14 md:w-14 md:rounded-xl`}>
 										<img src={quiz.icon} alt={quiz.alt} />
 									</span>
 
