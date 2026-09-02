@@ -5,7 +5,7 @@ import moonIconDark from '../assets/images/icon-moon-dark.svg';
 import { useState } from 'react';
 
 export const ThemeBtn = () => {
-	const [theme, setTheme] = useState<'light' | 'dark'>('light');
+	const [theme, setTheme] = useState<'light' | 'dark'>(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
 
 	const toggleTheme = () => {
 		const newTheme = theme === 'light' ? 'dark' : 'light';

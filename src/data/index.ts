@@ -1,26 +1,33 @@
-export const quizOptions = [
-	{
+import htmlIcon from '../assets/images/icon-html.svg';
+import cssIcon from '../assets/images/icon-css.svg';
+import jsIcon from '../assets/images/icon-js.svg';
+import accessibilityIcon from '../assets/images/icon-accessibility.svg';
+
+export const quizzes = {
+	HTML: {
 		url: '/html',
-		title: 'HTML',
-		alt: 'html icon image',
+		icon: htmlIcon,
+		alt: 'HTML icon',
 		bgColor: 'bg-orange-50',
 	},
-	{
+	CSS: {
 		url: '/css',
-		title: 'CSS',
-		alt: 'CSS icon image',
+		icon: cssIcon,
+		alt: 'CSS icon',
 		bgColor: 'bg-green-100',
 	},
-	{
+	JavaScript: {
 		url: '/javascript',
-		title: 'Javascript',
-		alt: 'javascript icon image',
+		icon: jsIcon,
+		alt: 'JavaScript icon',
 		bgColor: 'bg-blue-50',
 	},
-	{
+	Accessibility: {
 		url: '/accessibility',
-		title: 'Accessibility',
-		alt: 'accessibility icon image',
+		icon: accessibilityIcon,
+		alt: 'Accessibility icon',
 		bgColor: 'bg-purple-100',
 	},
-];
+} as const;
+
+export type QuizCategory = keyof typeof quizzes;
