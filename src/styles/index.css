@@ -162,6 +162,46 @@
 	box-shadow: 0px 16px 40px 0px hsla(216, 25%, 25%, 0.14);
 }
 
+@utility optionBtn {
+	@apply w-full border-3 border-transparent flex items-center justify-between bg-white rounded-xl p-4 boxShadowLight cursor-pointer dark:boxShadowDark dark:bg-blue-850  md:rounded-3xl xl:p-6;
+
+	div {
+		@apply flex items-center gap-4 md:gap-8;
+
+		span {
+			@apply flex items-center justify-center h-10 w-10 rounded-md bg-grey-50 text-grey-500 text-preset4-mobile md:h-14 md:w-14 md:rounded-xl md:text-preset4;
+		}
+
+		strong {
+			@apply text-preset4-mobile text-blue-900 dark:text-white md:text-preset4;
+		}
+	}
+
+	&.active {
+		@apply border-3 border-purple-600;
+
+		span {
+			@apply bg-purple-600 text-white dark:text-blue-850;
+		}
+	}
+
+	&.correct {
+		@apply border-3 border-green-500;
+
+		span {
+			@apply bg-green-500 text-white dark:text-blue-850;
+		}
+	}
+
+	&.incorrect {
+		@apply border-3 border-red-500;
+
+		span {
+			@apply bg-red-500 text-white dark:text-blue-850;
+		}
+	}
+}
+
 @utility sr-only {
 	position: absolute;
 	inset: 0;
