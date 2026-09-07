@@ -17,6 +17,8 @@ export const QuestionPage = ({ category }: QuestionPageProps) => {
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
 	const [selectedOptionIndex, setSelectedOptionIndex] = useState<number | null>(null);
 	const [showError, setShowError] = useState<boolean>(false);
+	const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+	const [submittedAnswerIsCorrect, setSubmittedAnswerIsCorrect] = useState<boolean | null>(null);
 
 	if (!quizQuestions || quizQuestions.length === 0) {
 		return <p className='text-red-500'>No questions found for this quiz.</p>;
@@ -26,13 +28,28 @@ export const QuestionPage = ({ category }: QuestionPageProps) => {
 	const progressPercentage = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
 
 	const handleOptionSelect = (optionIndex: number) => {
+		if (isSubmitted) return;
+
 		setSelectedOptionIndex(currentIndex => (currentIndex === optionIndex ? null : optionIndex));
 	};
 
-	console.log(currentQuestion);
-	console.log(selectedOptionIndex);
+	const goToNextQuestion = () => {
+		if (currentQuestionIndex === quizQuestions.length - 1) return;
+
+		setCurrentQuestionIndex(currentIndex => currentIndex + 1);
+		setSelectedOptionIndex(null);
+		setSubmittedAnswerIsCorrect(null);
+		setIsSubmitted(false);
+		setShowError(false);
+	};
 
 	const isAnswerCorrect = () => {
+		if (isSubmitted) {
+			goToNextQuestion();
+
+			return;
+		}
+
 		if (selectedOptionIndex === null) {
 			setShowError(true);
 			return;
@@ -40,10 +57,8 @@ export const QuestionPage = ({ category }: QuestionPageProps) => {
 			setShowError(false);
 		}
 
-		if (currentQuestion.answer === currentQuestion.options[selectedOptionIndex]) {
-			console.log('Correct answer!');
-		}
-		// Finish this logic
+		setSubmittedAnswerIsCorrect(currentQuestion.answer === currentQuestion.options[selectedOptionIndex]);
+		setIsSubmitted(true);
 	};
 
 	return (
@@ -76,11 +91,18 @@ export const QuestionPage = ({ category }: QuestionPageProps) => {
 				<div className='xl:min-w-141'>
 					<ol className='flex flex-col gap-4 md:gap-6'>
 						{currentQuestion.options.map((option, optionIndex) => (
-							<OptionBtn key={option} option={option} optionIndex={optionIndex} handleOptionSelect={handleOptionSelect} isSelected={selectedOptionIndex === optionIndex} />
+							<OptionBtn
+								key={option}
+								option={option}
+								optionIndex={optionIndex}
+								handleOptionSelect={handleOptionSelect}
+								isSelected={selectedOptionIndex === optionIndex}
+								answerState={isSubmitted && selectedOptionIndex === optionIndex ? (submittedAnswerIsCorrect ? 'correct' : 'incorrect') : null}
+							/>
 						))}
 					</ol>
 
-					<SubmitBtn isAnswerCorrect={isAnswerCorrect} />
+					<SubmitBtn isAnswerCorrect={isAnswerCorrect} isSubmitted={isSubmitted} />
 
 					<div className={`${showError ? 'flex' : 'hidden'} items-center justify-center gap-2 mt-4 md:mt-8`}>
 						<img src={errorIcon} alt='icon image representing an error' className='h-8 w-8' />

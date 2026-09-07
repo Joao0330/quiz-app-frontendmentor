@@ -6,21 +6,23 @@ interface OptionBtnProps {
 	optionIndex: number;
 	handleOptionSelect: (optionIndex: number) => void;
 	isSelected: boolean;
+	answerState: 'correct' | 'incorrect' | null;
 }
 
-export const OptionBtn = ({ option, optionIndex, handleOptionSelect, isSelected }: OptionBtnProps) => {
+export const OptionBtn = ({ option, optionIndex, handleOptionSelect, isSelected, answerState }: OptionBtnProps) => {
 	const questionLetters = ['A', 'B', 'C', 'D'];
+	const optionClass = answerState ?? (isSelected ? 'active' : '');
 
 	return (
 		<li>
-			<button type='button' className={`optionBtn${isSelected ? ' active' : ''} `} onClick={() => handleOptionSelect(optionIndex)}>
+			<button type='button' className={`optionBtn ${optionClass}`} onClick={() => handleOptionSelect(optionIndex)} disabled={answerState !== null}>
 				<div>
 					<span>{questionLetters[optionIndex]}</span>
 					<strong>{option}</strong>
 				</div>
 
-				<img src={correctIcon} alt='correct icon image' className={`hidden`} />
-				<img src={incorrectIcon} alt='incorrect icon image' className='hidden' />
+				<img src={correctIcon} alt='correct icon image' className={answerState === 'correct' ? '' : 'hidden'} />
+				<img src={incorrectIcon} alt='incorrect icon image' className={answerState === 'incorrect' ? '' : 'hidden'} />
 			</button>
 		</li>
 	);
