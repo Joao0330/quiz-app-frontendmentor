@@ -4,12 +4,12 @@ import { ThemeBtn } from '@/components/ThemeBtn';
 
 export const Welcome = () => {
 	return (
-		<section className='min-h-screen pb-51.75 px-6 md:px-16 md:pb-56.25 xl:pb-68 xl:pr-35.75 xl:pl-35'>
+		<section className='min-h-screen px-6 md:px-16 xl:px-0 xl:pr-35.75 xl:pl-35'>
 			<header className='flex justify-end py-4 md:py-13.5 xl:py-0 xl:pt-24.25 xl:pb-24.75'>
 				<ThemeBtn />
 			</header>
 
-			<div className='flex flex-col gap-10 pt-8 md:pt-0 md:gap-16 xl:flex-row xl:items-start xl:gap-32'>
+			<div className='flex flex-col gap-10 pt-8 md:pt-0 md:gap-16 xl:flex-row xl:items-start xl:justify-between xl:gap-32'>
 				<div className='xl:w-1/2'>
 					<h1 className='text-preset2-light-mobile text-blue-900 mb-4 dark:text-white md:text-preset2-light xl:mb-12'>
 						Welcome to the <span className='text-preset2-medium-mobile md:text-preset2-medium'>Frontend Quiz!</span>

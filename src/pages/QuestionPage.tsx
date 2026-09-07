@@ -5,6 +5,7 @@ import errorIcon from '@/assets/images/icon-error.svg';
 import { quizzes, type QuizCategory } from '@/data';
 import quizData from '@/data/data.json';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 interface QuestionPageProps {
 	category: QuizCategory;
@@ -13,12 +14,14 @@ interface QuestionPageProps {
 export const QuestionPage = ({ category }: QuestionPageProps) => {
 	const quiz = quizzes[category];
 	const quizQuestions = quizData.quizzes.find(q => q.title === category)?.questions;
+	const navigate = useNavigate();
 
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
 	const [selectedOptionIndex, setSelectedOptionIndex] = useState<number | null>(null);
 	const [showError, setShowError] = useState<boolean>(false);
 	const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 	const [submittedAnswerIsCorrect, setSubmittedAnswerIsCorrect] = useState<boolean | null>(null);
+	const [correctAnswersCount, setCorrectAnswersCount] = useState<number>(0);
 
 	if (!quizQuestions || quizQuestions.length === 0) {
 		return <p className='text-red-500'>No questions found for this quiz.</p>;
@@ -34,7 +37,17 @@ export const QuestionPage = ({ category }: QuestionPageProps) => {
 	};
 
 	const goToNextQuestion = () => {
-		if (currentQuestionIndex === quizQuestions.length - 1) return;
+		if (currentQuestionIndex === quizQuestions.length - 1) {
+			navigate('/score', {
+				state: {
+					category,
+					correctAnswersCount,
+					totalQuestions: quizQuestions.length,
+				},
+			});
+
+			return;
+		}
 
 		setCurrentQuestionIndex(currentIndex => currentIndex + 1);
 		setSelectedOptionIndex(null);
@@ -58,6 +71,7 @@ export const QuestionPage = ({ category }: QuestionPageProps) => {
 		}
 
 		setSubmittedAnswerIsCorrect(currentQuestion.answer === currentQuestion.options[selectedOptionIndex]);
+		setCorrectAnswersCount(prevCount => prevCount + (currentQuestion.answer === currentQuestion.options[selectedOptionIndex] ? 1 : 0));
 		setIsSubmitted(true);
 	};
 
@@ -75,7 +89,7 @@ export const QuestionPage = ({ category }: QuestionPageProps) => {
 				<ThemeBtn />
 			</header>
 
-			<div className='pt-8 pb-21.75 flex flex-col gap-10 md:pt-0 xl:flex-row xl:items-start xl:gap-32'>
+			<div className='pt-8 pb-21.75 flex flex-col gap-10 md:pt-0 xl:flex-row xl:items-start xl:justify-between xl:gap-32'>
 				<div className='xl:min-w-116.25'>
 					<p className='text-preset5-mobile text-grey-500 dark:text-blue-300 md:text-preset6'>
 						Question <span>{currentQuestionIndex + 1}</span> of <span>{quizQuestions.length}</span>

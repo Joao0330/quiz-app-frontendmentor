@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router';
 
 import { Welcome } from './pages/Welcome';
 import { QuestionPage } from './pages/QuestionPage';
+import { ScorePage } from './pages/ScorePage';
 
 export const router = createBrowserRouter([
 	{
@@ -11,6 +12,7 @@ export const router = createBrowserRouter([
 			{ path: '/css', element: <QuestionPage category='CSS' /> },
 			{ path: '/javascript', element: <QuestionPage category='JavaScript' /> },
 			{ path: '/accessibility', element: <QuestionPage category='Accessibility' /> },
+			{ path: '/score', element: <ScorePage /> },
 		],
 	},
 ]);

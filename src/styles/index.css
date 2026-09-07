@@ -154,6 +154,10 @@
 	font-style: italic;
 }
 
+@utility container {
+	@apply min-h-screen pb-51.75 px-6 md:px-16 md:pb-56.25 xl:pb-68 xl:pr-35.75 xl:pl-35;
+}
+
 @utility boxShadowLight {
 	box-shadow: 0px 16px 40px 0px #8fa0c124;
 }
