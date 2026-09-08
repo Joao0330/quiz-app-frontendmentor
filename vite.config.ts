@@ -5,6 +5,7 @@ import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
 export default defineConfig({
+	base: '/quiz-app-frontendmentor/',
 	plugins: [react(), tailwindcss()],
 	resolve: {
 		alias: {
