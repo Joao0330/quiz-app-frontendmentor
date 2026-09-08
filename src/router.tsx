@@ -4,15 +4,20 @@ import { Welcome } from './pages/Welcome';
 import { QuestionPage } from './pages/QuestionPage';
 import { ScorePage } from './pages/ScorePage';
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+	[
+		{
+			children: [
+				{ path: '/', element: <Welcome /> },
+				{ path: '/html', element: <QuestionPage category='HTML' /> },
+				{ path: '/css', element: <QuestionPage category='CSS' /> },
+				{ path: '/javascript', element: <QuestionPage category='JavaScript' /> },
+				{ path: '/accessibility', element: <QuestionPage category='Accessibility' /> },
+				{ path: '/score', element: <ScorePage /> },
+			],
+		},
+	],
 	{
-		children: [
-			{ path: '/', element: <Welcome /> },
-			{ path: '/html', element: <QuestionPage category='HTML' /> },
-			{ path: '/css', element: <QuestionPage category='CSS' /> },
-			{ path: '/javascript', element: <QuestionPage category='JavaScript' /> },
-			{ path: '/accessibility', element: <QuestionPage category='Accessibility' /> },
-			{ path: '/score', element: <ScorePage /> },
-		],
+		basename: '/quiz-app-frontendmentor',
 	},
-]);
+);
